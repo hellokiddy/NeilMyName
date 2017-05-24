@@ -19,6 +19,8 @@ $RECYCLE.BIN/
 
 # =========================
 # Operating System Files
+/Library
+/obj
 # =========================
 
 # OSX

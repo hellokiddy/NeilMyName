@@ -1,0 +1,2 @@
+Assembly-CSharp
+Keedy.Base.IO.FileHelper Keedy.Base.IO.FilePathHelper Keedy.Base.IO.DirectoryHelper
