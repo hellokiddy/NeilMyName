@@ -6,6 +6,7 @@ namespace Keedy.Common.Load
 {
     public interface ILoadTask
     {
+        void OnLoaderComplete(ILoader loader);
 
     }
 }

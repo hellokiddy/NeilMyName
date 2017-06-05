@@ -4,6 +4,13 @@ using UnityEngine;
 
 namespace Keedy.Common.Load
 {
+    public enum ELoadPriorityLevel
+    {
+        UNKNOWN = 0,
+        NORMAL,
+        IMPORTANT,
+    }
+
     /// <summary>
     /// call back when load completed...
     /// </summary>
@@ -20,13 +27,12 @@ namespace Keedy.Common.Load
         {
             m_AcitveLoaderList = new List<ILoader>();
             m_WaitingLoaderList = new List<ILoader>();
-
         }
 
 
         public void Clear()
         {
-
+            
         }
 
 
@@ -50,7 +56,7 @@ namespace Keedy.Common.Load
             {
                 ILoader loader = PopHighestPriorityLoader();
                 m_AcitveLoaderList.Add(loader);
-                loader.Update();
+                loader.Begin();
             }
         }
 
@@ -59,7 +65,30 @@ namespace Keedy.Common.Load
         {
             return null;
         }
-        
+
+        ILoader GetLoader(string path)
+        {
+            for (int i = 0; i < m_AcitveLoaderList.Count; i++)
+            {
+                if (path == m_AcitveLoaderList[i].Url)
+                {
+                    return m_AcitveLoaderList[i];
+                }
+            }
+            for (int i = 0; i < m_WaitingLoaderList.Count; i++)
+            {
+                if (path == m_WaitingLoaderList[i].Url)
+                {
+                    return m_WaitingLoaderList[i];
+                }
+            }
+            return AddNewLoader(path, 0);
+        }
+
+        ILoader AddNewLoader(string path, int priority)
+        {
+            return null;
+        }
         void RecycleLoader(ILoader loader)
         {
             loader.Dispose();
