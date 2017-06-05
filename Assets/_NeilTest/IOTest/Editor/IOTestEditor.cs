@@ -6,9 +6,13 @@ using Keedy.Base.IO;
 using System.IO;
 using System.Reflection;
 using System;
+
+public static class TestSetting
+{
+    public const string TestMenu = "Neil/Test/";
+}
 public class IOTestEditor : EditorWindow
 {
-
     [MenuItem("Neil/Test/OpenIOTestWindow", false, 1)]
     static void ShowWindow()
     {
