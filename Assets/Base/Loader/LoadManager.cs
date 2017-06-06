@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Keedy.Common.Load
 {
@@ -25,7 +26,9 @@ namespace Keedy.Common.Load
 
         public void Clear()
         {
-            
+            m_AcitveLoaderList.Clear();
+            m_WaitingLoaderList.Clear();
+            m_Pause = false;
         }
 
 
@@ -53,7 +56,44 @@ namespace Keedy.Common.Load
             }
         }
 
-        public ILoadState CreateLoadTask()
+        public ILoadState CreateLoadTask(string assetPath, OnLoadTaskComplete onTaskComplete, int priority, ELoaderType loaderType)
+        {
+            return CreateLoadTask(new List<string>() { assetPath }, onTaskComplete, priority, loaderType);
+        }
+        public ILoadState CreateLoadTask(List<string> assetPaths, OnLoadTaskComplete onTaskComplete, int priority, ELoaderType loaderType)
+        {
+            if (onTaskComplete == null)
+            {
+                throw new Exception("There's no call back when task completed!!!");
+            }
+            if (assetPaths == null || assetPaths.Count == 0)
+            {
+                throw new Exception("There's no asset to load!!!");
+            }
+            
+            ILoadTask task = GetTask();
+            task.AddTaskCallBack(onTaskComplete);
+
+            for (int i = 0; i < assetPaths.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(assetPaths[i]))
+                {
+                    ILoader loader = GetLoader(assetPaths[i], priority, loaderType);
+                    loader.AddTask(task);
+                }
+            }
+
+            ILoadState state = GetState();
+            state.SetTask(task);
+            return state;
+        }
+
+        ILoadState GetState()
+        {
+            return null;
+        }
+
+        ILoadTask GetTask()
         {
             return null;
         }
@@ -89,7 +129,6 @@ namespace Keedy.Common.Load
             m_WaitingLoaderList.Add(loader);
             return loader;
         }
-
 
         //loader factory
         ILoader CreateLoader(ELoaderType loaderType)

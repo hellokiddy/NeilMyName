@@ -6,6 +6,9 @@ namespace Keedy.Common.Load
 {
     public interface ILoadTask
     {
+        int LoaderCount { get; }
+        int CompletedLoaderCount { get; }
+        void AddTaskCallBack(OnLoadTaskComplete callback);
         void OnLoaderComplete(string assetName, object asset);
         void OnTaskComplete();
     }
