@@ -7,7 +7,7 @@ namespace Keedy.Common.Load
 {
     public interface ILoadAsset
     {
-
-        Object GetAssetByName(string assetName);
+        bool TryGetAssetByName(string assetName, out Object asset);
+        void AddAsset(string assetName, Object asset);
     }
 }

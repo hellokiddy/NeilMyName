@@ -4,9 +4,14 @@ using UnityEngine;
 
 namespace Keedy.Common.Load
 {
-    public interface ILoadTask
+    public enum EAssetType
     {
-        void OnLoaderComplete(string assetName, object asset);
-        void OnTaskComplete();
+
+    }
+
+    public enum ELoaderType
+    {
+        WWW_LOADER,
+        RESOURCE_LOADER,
     }
 }

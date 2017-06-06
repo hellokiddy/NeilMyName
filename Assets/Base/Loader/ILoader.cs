@@ -7,11 +7,12 @@ namespace Keedy.Common.Load
 {
     public interface ILoader
     {
-        ILoadTask Task { get; }
+        ELoaderType LoaderType { get; }
         string Url { get; }
         bool IsDone { get; }
-        int Priority { get; }
+        int Priority { get; set; }
         void Init(string url, int priority);
+        void AddTask(ILoadTask task);
         void Begin();
         void Update();
         void Dispose();

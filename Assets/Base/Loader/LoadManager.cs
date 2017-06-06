@@ -4,13 +4,6 @@ using UnityEngine;
 
 namespace Keedy.Common.Load
 {
-    public enum ELoadPriorityLevel
-    {
-        UNKNOWN = 0,
-        NORMAL,
-        IMPORTANT,
-    }
-
     /// <summary>
     /// call back when load completed...
     /// </summary>
@@ -60,13 +53,12 @@ namespace Keedy.Common.Load
             }
         }
 
-
         public ILoadState CreateLoadTask()
         {
             return null;
         }
 
-        ILoader GetLoader(string path)
+        ILoader GetLoader(string path, int priority, ELoaderType loaderType)
         {
             for (int i = 0; i < m_AcitveLoaderList.Count; i++)
             {
@@ -79,16 +71,41 @@ namespace Keedy.Common.Load
             {
                 if (path == m_WaitingLoaderList[i].Url)
                 {
+                    if(m_WaitingLoaderList[i].Priority < priority)
+                    {
+                        m_WaitingLoaderList[i].Priority = priority;
+                    }
                     return m_WaitingLoaderList[i];
                 }
             }
-            return AddNewLoader(path, 0);
+            ILoader loader = AddNewLoader(loaderType);
+            loader.Init(path, priority);
+            return loader;
         }
 
-        ILoader AddNewLoader(string path, int priority)
+        ILoader AddNewLoader(ELoaderType loaderType)
         {
-            return null;
+            ILoader loader = CreateLoader(loaderType);
+            m_WaitingLoaderList.Add(loader);
+            return loader;
         }
+
+
+        //loader factory
+        ILoader CreateLoader(ELoaderType loaderType)
+        {
+            ILoader loader = null;
+            switch (loaderType)
+            {
+                case ELoaderType.WWW_LOADER:
+                    break;
+                case ELoaderType.RESOURCE_LOADER:
+                    break;
+            }
+            return loader;
+        }
+
+        //Recycle loader here
         void RecycleLoader(ILoader loader)
         {
             loader.Dispose();
