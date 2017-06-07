@@ -13,6 +13,13 @@ namespace Keedy.Common.Load
 
     public class LoadManager 
     {
+        /****************************************** Todo List ******************************************/
+        /*
+            1.ILoader,ILoadTask的对象池缓存
+            2.防止内存碎片化的处理
+            3.加载错误机制
+            4.函数调用异常机制
+        */
         private List<ILoader> m_WaitingLoaderList;
         private List<ILoader> m_AcitveLoaderList;
         private int m_MaxLoadCount = 4;
@@ -73,14 +80,12 @@ namespace Keedy.Common.Load
             
             ILoadTask task = GetTask();
             task.AddTaskCallBack(onTaskComplete);
+            task.SetLoaderCount(assetPaths.Count);
 
             for (int i = 0; i < assetPaths.Count; i++)
             {
-                if (!string.IsNullOrEmpty(assetPaths[i]))
-                {
-                    ILoader loader = GetLoader(assetPaths[i], priority, loaderType);
-                    loader.AddTask(task);
-                }
+                ILoader loader = GetLoader(assetPaths[i], priority, loaderType);
+                loader.AddTask(task);
             }
 
             ILoadState state = GetState();

@@ -8,8 +8,9 @@ namespace Keedy.Common.Load
     {
         int LoaderCount { get; }
         int CompletedLoaderCount { get; }
+        void SetLoaderCount(int count);
         void AddTaskCallBack(OnLoadTaskComplete callback);
-        void OnLoaderComplete(string assetName, object asset);
+        void OnLoaderComplete(ILoader loader);
         void OnTaskComplete();
     }
 }

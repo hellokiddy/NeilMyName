@@ -9,8 +9,10 @@ namespace Keedy.Common.Load
     {
         ELoaderType LoaderType { get; }
         string Url { get; }
+        string Error { get; }
         bool IsDone { get; }
         int Priority { get; set; }
+        object Data { get; }
         void Init(string url, int priority);
         void AddTask(ILoadTask task);
         void Begin();

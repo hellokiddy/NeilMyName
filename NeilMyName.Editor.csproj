@@ -127,6 +127,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\BundleTools.cs" />
     <Compile Include="Assets\_NeilTest\IOTest\Editor\IOTestEditor.cs" />
     <Compile Include="Assets\_NeilTest\IOTest\Editor\MyselfTest.cs" />
   </ItemGroup>
