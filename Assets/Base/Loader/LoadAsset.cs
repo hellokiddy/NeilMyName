@@ -4,14 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Keedy.Common.Load
-{
-    public static class LoadConf
-    {
-        public const string c_EmptyLoadPathError = "the path to load asset is empty...";
-        public const string c_NoSuchLoaderError = "you haven't create a loader to load the asset";
-        public const string c_OutOfTimeError = "failed to load the asset in MaxLoadingTime...";
-        public const float c_MaxLoadingTime = 20f;
-    }
+{    
     public class LoadAsset : ILoadAsset
     {
         class Asset

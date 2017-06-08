@@ -24,6 +24,7 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
 
         mam.Update(Time.deltaTime);
 	}
+    float timer = 0;
     void OnGUI()
     {
         if(GUILayout.Button("Start"))
@@ -36,6 +37,7 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
             FileHelper.LoadFile(Application.dataPath + "/_NeilTest/LoadTest/SceneData2.json", out str);
             source = JsonMapper.ToObject<SeceneSource>(str);
 
+            timer = Time.realtimeSinceStartup;
             state = mam.CreateLoadTask(source.sceneDeps, OnTaskComplete, 0, ELoaderType.WWW_LOADER);
         }
 
@@ -67,6 +69,8 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
     }
     void OnTaskComplete(ILoadAsset asset)
     {
+
+        Debug.LogError("Use time:" + (Time.realtimeSinceStartup - timer).ToString());
         for (int i = 0; i < source.sceneDeps.Length; i++)
         {
             if (source.sceneDeps[i].Contains("unity")) continue;
