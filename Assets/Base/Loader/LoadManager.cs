@@ -28,6 +28,8 @@ namespace Keedy.Common.Load
         {
             m_AcitveLoaderList = new List<ILoader>();
             m_WaitingLoaderList = new List<ILoader>();
+            m_Pause = false;
+            LoadTask.s_RecycleTask = RecycleTask;
         }
 
 
@@ -68,39 +70,35 @@ namespace Keedy.Common.Load
             return CreateLoadTask(new List<string>() { assetPath }, onTaskComplete, priority, loaderType);
         }
         public ILoadState CreateLoadTask(List<string> assetPaths, OnLoadTaskComplete onTaskComplete, int priority, ELoaderType loaderType)
-        {
-            if (onTaskComplete == null)
-            {
-                throw new Exception("There's no call back when task completed!!!");
-            }
-            if (assetPaths == null || assetPaths.Count == 0)
-            {
-                throw new Exception("There's no asset to load!!!");
-            }
-            
+        {            
             ILoadTask task = GetTask();
             task.AddTaskCallBack(onTaskComplete);
-            task.SetLoaderCount(assetPaths.Count);
+            int loaderCount = assetPaths == null ? 0 : assetPaths.Count;
+            //set loader count first, then the task could check if completed...
+            task.SetLoaderCount(loaderCount);
 
-            for (int i = 0; i < assetPaths.Count; i++)
+            if(assetPaths != null)
             {
-                ILoader loader = GetLoader(assetPaths[i], priority, loaderType);
-                loader.AddTask(task);
+                for (int i = 0; i < assetPaths.Count; i++)
+                {
+                    ILoader loader = GetLoader(assetPaths[i], priority, loaderType);
+                    loader.AddTask(task);
+                }
             }
-
             ILoadState state = GetState();
             state.SetTask(task);
             return state;
         }
 
+        /****************************************** prepare to use object pool ******************************************/
         ILoadState GetState()
         {
-            return null;
+            return new LoadState();
         }
 
         ILoadTask GetTask()
         {
-            return null;
+            return new LoadTask();
         }
 
         ILoader GetLoader(string path, int priority, ELoaderType loaderType)
@@ -142,6 +140,7 @@ namespace Keedy.Common.Load
             switch (loaderType)
             {
                 case ELoaderType.WWW_LOADER:
+                    loader = new WWWLoader();
                     break;
                 case ELoaderType.RESOURCE_LOADER:
                     break;
@@ -153,8 +152,11 @@ namespace Keedy.Common.Load
         void RecycleLoader(ILoader loader)
         {
             loader.Dispose();
+        }        
+        void RecycleTask(LoadTask task)
+        {
+            Debug.LogError("A task is completed...");
         }
-        
         /// <summary>
         /// Pop the highest priority loader from m_WaitingLoaderList
         /// </summary>

@@ -15,6 +15,7 @@ namespace Keedy.Common.Load
         private int m_Priority;
         private string m_Url;
         private string m_Error;
+        private object m_Data;
 
         public bool IsDone { get { return m_IsDone; } }
 
@@ -26,7 +27,7 @@ namespace Keedy.Common.Load
 
         public string Error { get { return m_Error; } }
 
-        public object Data { get { return m_WWW.assetBundle; } }
+        public object Data { get { return m_Data; } }
 
         public WWWLoader()
         {
@@ -37,6 +38,11 @@ namespace Keedy.Common.Load
         {
             m_Url = url;
             m_Priority = priority;
+            if (string.IsNullOrEmpty(m_Url))
+            {
+                m_Error = LoadError.EmptyLoadPath;
+                m_IsDone = true;
+            }
         }
 
         public void AddTask(ILoadTask task)
@@ -46,7 +52,11 @@ namespace Keedy.Common.Load
 
         public void Begin()
         {
-            m_WWW = new WWW(m_Url);
+            //if inited failed, you will not need to create a www.
+            if(m_IsDone == false)
+            {
+                m_WWW = new WWW(m_Url);
+            }
         }
 
         public void Update()
@@ -55,6 +65,7 @@ namespace Keedy.Common.Load
             {
                 m_IsDone = true;
                 m_Error = m_WWW.error;
+                m_Data = m_WWW.assetBundle;
             }
         }
 

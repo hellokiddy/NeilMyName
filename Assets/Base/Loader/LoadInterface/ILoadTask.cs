@@ -12,5 +12,6 @@ namespace Keedy.Common.Load
         void AddTaskCallBack(OnLoadTaskComplete callback);
         void OnLoaderComplete(ILoader loader);
         void OnTaskComplete();
+        void Dispose();
     }
 }

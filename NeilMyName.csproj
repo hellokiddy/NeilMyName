@@ -52,11 +52,8 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    <Reference Include="UnityEngine.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>Library\UnityAssemblies\UnityEngine.TestRunner.dll</HintPath>
@@ -64,8 +61,11 @@
     <Reference Include="nunit.framework">
       <HintPath>Library\UnityAssemblies\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
@@ -87,12 +87,14 @@
     <Compile Include="Assets\Base\IO\DirectoryHelper.cs" />
     <Compile Include="Assets\Base\IO\FileHelper.cs" />
     <Compile Include="Assets\Base\IO\FilePathHelper.cs" />
+    <Compile Include="Assets\Base\Loader\LoadAsset.cs" />
     <Compile Include="Assets\Base\Loader\LoadEnum.cs" />
     <Compile Include="Assets\Base\Loader\LoadInterface\ILoadAsset.cs" />
     <Compile Include="Assets\Base\Loader\LoadInterface\ILoadState.cs" />
     <Compile Include="Assets\Base\Loader\LoadInterface\ILoadTask.cs" />
     <Compile Include="Assets\Base\Loader\LoadInterface\ILoader.cs" />
     <Compile Include="Assets\Base\Loader\LoadManager.cs" />
+    <Compile Include="Assets\Base\Loader\LoadState.cs" />
     <Compile Include="Assets\Base\Loader\LoadTask.cs" />
     <Compile Include="Assets\Base\Loader\WWWLoader.cs" />
     <Compile Include="Assets\_NeilTest\LoadTest\LoadTestMonoBehaviour.cs" />
