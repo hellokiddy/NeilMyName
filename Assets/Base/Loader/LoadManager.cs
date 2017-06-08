@@ -161,6 +161,7 @@ namespace Keedy.Common.Load
                     loader = new WWWLoader();
                     break;
                 case ELoaderType.RESOURCE_LOADER:
+                    loader = new ResourceLoader();
                     break;
             }
             return loader;
@@ -173,7 +174,7 @@ namespace Keedy.Common.Load
         }        
         void RecycleTask(LoadTask task)
         {
-            Debug.LogError("A task is completed...");
+            //Debug.LogError("A task is completed...");
         }
         /// <summary>
         /// Pop the highest priority loader from m_WaitingLoaderList

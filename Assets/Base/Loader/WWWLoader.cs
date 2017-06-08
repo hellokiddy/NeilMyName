@@ -9,11 +9,6 @@ namespace Keedy.Common.Load
     {
         private WWW m_WWW;
         public override ELoaderType LoaderType { get { return ELoaderType.WWW_LOADER; } }
-
-        //public WWWLoader():base()
-        //{            
-        //}
-
         public override void Begin()
         {
             //if inited failed, you will not need to create a www.

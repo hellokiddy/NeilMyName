@@ -46,7 +46,27 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
             replaceShader();
         }
 
+        if (GUILayout.Button("TestResouceLoader"))
+        {
+            state = mam.CreateLoadTask("Scenelight", OnTaskComplete2, 1, ELoaderType.RESOURCE_LOADER);
+        }
+
         GUILayout.Label((state == null?0:state.LoadProcess).ToString());
+    }
+
+    void OnTaskComplete2(ILoadAsset asset)
+    {
+        object data;
+        string error = asset.TryGetAssetByName("Scenelight", out data);
+        if (string.IsNullOrEmpty(error))
+        {
+            GameObject go = GameObject.Instantiate((Object)data) as GameObject;
+            go.name = "check me!";
+        }
+        else
+        {
+            Debug.LogError(error);
+        }
     }
 
     ILoadState state;
