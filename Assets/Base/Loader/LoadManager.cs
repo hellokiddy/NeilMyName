@@ -41,12 +41,12 @@ namespace Keedy.Common.Load
         }
 
 
-        public void Update()
+        public void Update(float deltaTime)
         {
             for (int i = m_AcitveLoaderList.Count - 1; i >= 0; --i)
             {
                 ILoader loader = m_AcitveLoaderList[i];
-                loader.Update();
+                loader.Update(deltaTime);
                 if (loader.IsDone)
                 {
                     m_AcitveLoaderList.RemoveAt(i);
@@ -67,27 +67,34 @@ namespace Keedy.Common.Load
 
         public ILoadState CreateLoadTask(string assetPath, OnLoadTaskComplete onTaskComplete, int priority, ELoaderType loaderType)
         {
-            return CreateLoadTask(new List<string>() { assetPath }, onTaskComplete, priority, loaderType);
+            return CreateLoadTask(new string[] { assetPath }, onTaskComplete, priority, loaderType);
         }
-        public ILoadState CreateLoadTask(List<string> assetPaths, OnLoadTaskComplete onTaskComplete, int priority, ELoaderType loaderType)
-        {            
+
+        public ILoadState CreateLoadTask(string[] assetPaths, OnLoadTaskComplete onTaskComplete, int priority, ELoaderType loaderType)
+        {
             ILoadTask task = GetTask();
             task.AddTaskCallBack(onTaskComplete);
-            int loaderCount = assetPaths == null ? 0 : assetPaths.Count;
+            int loaderCount = assetPaths == null ? 0 : assetPaths.Length;
+
             //set loader count first, then the task could check if completed...
             task.SetLoaderCount(loaderCount);
 
-            if(assetPaths != null)
+            if (assetPaths != null)
             {
-                for (int i = 0; i < assetPaths.Count; i++)
+                for (int i = 0; i < assetPaths.Length; i++)
                 {
                     ILoader loader = GetLoader(assetPaths[i], priority, loaderType);
                     loader.AddTask(task);
                 }
             }
+
             ILoadState state = GetState();
             state.SetTask(task);
             return state;
+        }
+        public ILoadState CreateLoadTask(List<string> assetPaths, OnLoadTaskComplete onTaskComplete, int priority, ELoaderType loaderType)
+        {
+            return CreateLoadTask(assetPaths.ToArray(), onTaskComplete, priority, loaderType);
         }
 
         /****************************************** prepare to use object pool ******************************************/

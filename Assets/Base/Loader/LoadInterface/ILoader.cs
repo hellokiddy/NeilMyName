@@ -16,7 +16,7 @@ namespace Keedy.Common.Load
         void Init(string url, int priority);
         void AddTask(ILoadTask task);
         void Begin();
-        void Update();
+        void Update(float deltaTime);
         void Dispose();
         void Complete();
         void Delete();

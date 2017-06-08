@@ -46,9 +46,41 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Plugins\TestHelper.cs" />
+     <Compile Include="Assets\Plugins\CommonClass.cs" />
+     <Compile Include="Assets\Plugins\Litjson\IJsonWrapper.cs" />
+     <Compile Include="Assets\Plugins\Litjson\JsonData.cs" />
+     <Compile Include="Assets\Plugins\Litjson\JsonException.cs" />
+     <Compile Include="Assets\Plugins\Litjson\JsonMapper.cs" />
+     <Compile Include="Assets\Plugins\Litjson\JsonReader.cs" />
+     <Compile Include="Assets\Plugins\Litjson\JsonWriter.cs" />
+     <Compile Include="Assets\Plugins\Litjson\Lexer.cs" />
+     <Compile Include="Assets\Plugins\Litjson\ParserToken.cs" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\Effect\SceneEffect\effect_distort_UVanima(add).shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\Frost.shader" />
+     <None Include="Assets\System\LightFunction.cginc" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\SunShaftsComposite.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shaders\Particles\Mobile-Particle-Add.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shaders\MotionBlur.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\MobileBloom.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\FlashscaleEffect.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shaders\Spark\Ground\SimpleGroundBumped.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\TonemappingColorGrading\HistogramRender.shader" />
      <None Include="Assets\_NeilTest\IOTest\Editor\MyClasses.txt" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\MobileBlur.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shaders\Spark\Skybox\AlphaBlendSkyBox.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shaders\Effect\effect_distort_add.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\BloomDualFilter.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\TonemappingColorGrading\TonemappingColorGrading.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\BrightPassFilter2.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\ColorCorrectionEffect.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\GrayscaleEffect.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\LensFlareCreate.shader" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\SimpleClear.shader" />
      <None Include="Assets\_NeilTest\IOTest\Editor\Trust.txt" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\TonemappingColorGrading\HistogramCompute.compute" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\BlurAndFlares.shader" />
+     <None Include="Assets\System\LightFuncs.cginc" />
+     <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

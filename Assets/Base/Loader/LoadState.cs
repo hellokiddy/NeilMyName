@@ -12,7 +12,7 @@ namespace Keedy.Common.Load
         {
             get
             {
-                if(m_Task != null && m_Task.LoaderCount > 0 && m_Task.CompletedLoaderCount > 0)
+                if(m_Task != null && m_Task.LoaderCount > 0 && m_Task.CompletedLoaderCount >= 0)
                 {
                     return (float)m_Task.CompletedLoaderCount / m_Task.LoaderCount;
                 }

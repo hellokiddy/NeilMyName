@@ -40,7 +40,6 @@ namespace Keedy.Common.Load
         public void SetLoaderCount(int count)
         {
             m_LoaderCount = count;
-
             CheckTask();
         }
 
@@ -48,9 +47,9 @@ namespace Keedy.Common.Load
         {
             //don't call me in a wrong way...
             if (!loader.IsDone) return;
-            //in case the same loader call the method repeatedly, we need check the result of add asset.   
-            bool ret = m_LoadAsset.AddAsset(loader.Url, loader.Data, loader.Error);
-            if (ret) { ++m_CompletedLoaderCount; }
+
+            m_LoadAsset.AddAsset(loader.Url, loader.Data, loader.Error);
+            ++m_CompletedLoaderCount;
             CheckTask();
         }
         public void OnTaskComplete()

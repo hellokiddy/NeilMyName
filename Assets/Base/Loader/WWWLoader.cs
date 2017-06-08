@@ -16,7 +16,7 @@ namespace Keedy.Common.Load
         private string m_Url;
         private string m_Error;
         private object m_Data;
-
+        private float m_LoadingTime;
         public bool IsDone { get { return m_IsDone; } }
 
         public ELoaderType LoaderType { get { return ELoaderType.WWW_LOADER; } }
@@ -40,13 +40,14 @@ namespace Keedy.Common.Load
             m_Priority = priority;
             if (string.IsNullOrEmpty(m_Url))
             {
-                m_Error = LoadError.EmptyLoadPath;
+                m_Error = LoadConf.c_EmptyLoadPathError;
                 m_IsDone = true;
             }
         }
 
         public void AddTask(ILoadTask task)
         {
+            //can't de-emphasis, because a task may sign some same loaders...
             m_TaskList.Add(task);
         }
 
@@ -55,17 +56,30 @@ namespace Keedy.Common.Load
             //if inited failed, you will not need to create a www.
             if(m_IsDone == false)
             {
-                m_WWW = new WWW(m_Url);
+                m_WWW = new WWW("file://" + Application.dataPath + "/_NeilTest/LoadTest/AB/" + m_Url);
             }
         }
 
-        public void Update()
+        public void Update(float deltaTime)
         {
-            if (m_WWW.isDone && m_IsDone == false)
+            
+            if (m_IsDone == false)
             {
-                m_IsDone = true;
-                m_Error = m_WWW.error;
-                m_Data = m_WWW.assetBundle;
+                //set a max loading time to force complete the loader...
+                m_LoadingTime += Time.deltaTime;
+                if (LoadConf.c_MaxLoadingTime > 0 && m_LoadingTime >= LoadConf.c_MaxLoadingTime)
+                {
+                    m_IsDone = true;
+                    m_Error = LoadConf.c_OutOfTimeError;
+                }
+
+                //when www ready, complete the loader...
+                if (m_WWW.isDone)
+                {
+                    m_IsDone = true;
+                    m_Error = m_WWW.error;
+                    m_Data = m_WWW.assetBundle;
+                }
             }
         }
 
@@ -82,6 +96,7 @@ namespace Keedy.Common.Load
             m_TaskList.Clear();
             m_IsDone = false;
             m_Priority = 0;
+            m_LoadingTime = 0;
             if (m_WWW != null)
             {
                 m_WWW.Dispose();
