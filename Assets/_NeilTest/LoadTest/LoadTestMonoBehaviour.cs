@@ -34,21 +34,47 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
             //loader.Begin();
             // 
             string str;
-            FileHelper.LoadFile(Application.dataPath + "/_NeilTest/LoadTest/SceneData2.json", out str);
+            FileHelper.LoadFile(GlobalSetting.c_ConfFileRoot + "scene2.json", out str);
             source = JsonMapper.ToObject<SeceneSource>(str);
+
+            //for(int i = 0; i < source.sceneDeps.Length; ++i)
+            //{
+            //    source.sceneDeps[i] = null;
+            //}
 
             timer = Time.realtimeSinceStartup;
             state = mam.CreateLoadTask(source.sceneDeps, OnTaskComplete, 0, ELoaderType.WWW_LOADER);
         }
 
-        if(GUILayout.Button("Replace"))
+        if (GUILayout.Button("Unload scene & ABs"))
         {
-            replaceShader();
+            SceneManager.UnloadSceneAsync(source.sceneName);
+            for(int i = 0; i < abs.Count; ++i)
+            {
+                if (abs[i] == null) continue;
+                abs[i].Unload(false);
+            }
+            abs.Clear();
         }
 
         if (GUILayout.Button("TestResouceLoader"))
         {
-            state = mam.CreateLoadTask("Scenelight", OnTaskComplete2, 1, ELoaderType.RESOURCE_LOADER);
+            
+        }
+
+        if (GUILayout.Button("TestResourcePath"))
+        {
+            //路径中有多个Resources时，相对于任何一个Resources的路径都可以
+            //Shading/Shaders/PostProcess/Resources/
+            Object obj = Resources.Load<Texture>("Shading/Shaders/PostProcess/Resources/Textures/VignetteMask");
+            if(obj != null)
+            {
+                Debug.LogError(obj.name);
+            }
+            else
+            {
+                Debug.LogError("Load Failed...");
+            }
         }
 
         GUILayout.Label((state == null?0:state.LoadProcess).ToString());
@@ -80,6 +106,7 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
     }
 
     List<Object> caches = new List<Object>();
+    List<AssetBundle> abs = new List<AssetBundle>();
     void AddToCaches(Object[] assets)
     {
         for (int i = 0; i < assets.Length; i++)
@@ -93,7 +120,7 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
         Debug.LogError("Use time:" + (Time.realtimeSinceStartup - timer).ToString());
         for (int i = 0; i < source.sceneDeps.Length; i++)
         {
-            if (source.sceneDeps[i].Contains("unity")) continue;
+            if (source.sceneDeps[i] == null||source.sceneDeps[i].Contains("unity")) continue;
 
             object ab;
             string error = (asset.TryGetAssetByName(source.sceneDeps[i], out ab));
@@ -101,8 +128,8 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
             {
                 AssetBundle ab2 = ab as AssetBundle;
                 if(ab2 != null){
-                    AddToCaches(ab2.LoadAllAssets());
-                    ab2.Unload(false);
+                    //AddToCaches(ab2.LoadAllAssets());
+                    abs.Add(ab2);
                 }
             }
             else{
@@ -111,10 +138,7 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
         }
         Debug.LogError("Task Complete...");
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(source.sceneName);
-
-        GameObject go = new GameObject("hello world");
-        go.AddComponent<Camera>();
+        SceneManager.LoadScene(source.sceneName);
     }
 
     void replaceShader()
@@ -129,7 +153,7 @@ public class LoadTestMonoBehaviour : MonoBehaviour {
         {
             if (rens[i].sharedMaterial != null)
             {
-                //rens[i].sharedMaterial.shader = shader;
+                rens[i].sharedMaterial.shader = shader;
             }
         }
     }

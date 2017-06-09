@@ -7,13 +7,13 @@ namespace Keedy.Common.Load
 {
     public static class LoadConf
     {
+        //error code...
         public const string c_EmptyLoadPathError = "the path to load asset is empty...";
         public const string c_NoSuchLoaderError = "you haven't create a loader to load the asset";
         public const string c_OutOfTimeError = "failed to load the asset in MaxLoadingTime...";
         public const string c_LoadError = "load error...";
         
         public const float c_MaxLoadingTime = 20f;
-
     }
 
     /// <summary>
@@ -35,6 +35,7 @@ namespace Keedy.Common.Load
         private List<ILoader> m_AcitveLoaderList;
         private int m_MaxLoadCount = 4;
         bool m_Pause = false;
+
         public void Init()
         {
             m_AcitveLoaderList = new List<ILoader>();
@@ -174,7 +175,7 @@ namespace Keedy.Common.Load
         }        
         void RecycleTask(LoadTask task)
         {
-            //Debug.LogError("A task is completed...");
+            Debug.LogError("here need recycle load task...");
         }
         /// <summary>
         /// Pop the highest priority loader from m_WaitingLoaderList

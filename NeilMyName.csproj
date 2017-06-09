@@ -87,6 +87,7 @@
     <Compile Include="Assets\Base\IO\DirectoryHelper.cs" />
     <Compile Include="Assets\Base\IO\FileHelper.cs" />
     <Compile Include="Assets\Base\IO\FilePathHelper.cs" />
+    <Compile Include="Assets\Base\Loader\AbstractLoader.cs" />
     <Compile Include="Assets\Base\Loader\LoadAsset.cs" />
     <Compile Include="Assets\Base\Loader\LoadEnum.cs" />
     <Compile Include="Assets\Base\Loader\LoadInterface\ILoadAsset.cs" />
@@ -96,10 +97,40 @@
     <Compile Include="Assets\Base\Loader\LoadManager.cs" />
     <Compile Include="Assets\Base\Loader\LoadState.cs" />
     <Compile Include="Assets\Base\Loader\LoadTask.cs" />
+    <Compile Include="Assets\Base\Loader\ResourceLoader.cs" />
     <Compile Include="Assets\Base\Loader\WWWLoader.cs" />
+    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\CharacterLightControl\Clight.cs" />
+    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\GrassVertexAnimation.cs" />
+    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\MotionBlur.cs" />
+    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\Water.cs" />
+    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\WaterRefl.cs" />
     <Compile Include="Assets\_NeilTest\LoadTest\LoadTestMonoBehaviour.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\_IgnoreResources\Resources\Shaders\Effect\effect_distort_add.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shaders\MotionBlur.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shaders\Particles\Mobile-Particle-Add.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shaders\Spark\Ground\SimpleGroundBumped.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shaders\Spark\Skybox\AlphaBlendSkyBox.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shaders\Spark\System\LightFuncs.cginc" />
+    <None Include="Assets\_IgnoreResources\Resources\Shaders\Spark\System\LightFunction.cginc" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\Effect\SceneEffect\effect_distort_UVanima(add).shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\ColorCorrectionEffect.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\FlashscaleEffect.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\Frost.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\GrayscaleEffect.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\SimpleClear.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\SunShaftsComposite.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\TonemappingColorGrading\HistogramCompute.compute" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\TonemappingColorGrading\HistogramRender.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\TonemappingColorGrading\TonemappingColorGrading.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\BlendForBloom.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\BloomDualFilter.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\BlurAndFlares.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\BrightPassFilter2.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\LensFlareCreate.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\MobileBloom.shader" />
+    <None Include="Assets\_IgnoreResources\Resources\Shading\Shaders\PostProcess\Resources\_BloomAndFlares\MobileBlur.shader" />
     <None Include="Assets\_NeilTest\IOTest\Editor\MyClasses.txt" />
     <None Include="Assets\_NeilTest\IOTest\Editor\Trust.txt" />
   </ItemGroup>

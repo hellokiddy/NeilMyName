@@ -49,3 +49,7 @@ _IgnoreResources
 /Assets/_IgnoreResources.meta
 AB
 /Assets/_NeilTest/LoadTest/AB.meta
+DataPC
+ConfigFile
+/Assets/UnityVS.meta
+.vs

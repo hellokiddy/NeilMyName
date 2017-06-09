@@ -14,7 +14,11 @@ namespace Keedy.Common.Load
             //if inited failed, you will not need to create a www.
             if(m_IsDone == false)
             {
+#if TEST_CODE
+                m_WWW = new WWW(GlobalSetting.GetWWWPath(m_Url));
+#else
                 m_WWW = new WWW(m_Url);
+#endif
             }
         }
 

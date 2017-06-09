@@ -17,7 +17,8 @@ public class BuildScene
         source.sceneDeps = GetPrefabPath(scene);
 
         string data = JsonMapper.ToJson(source);
-        Keedy.Base.IO.FileHelper.SaveFile(Application.dataPath + "/_NeilTest/LoadTest/SceneData.json", data);
+        data = GlobalSetting.FormatJson(data);
+        Keedy.Base.IO.FileHelper.SaveFile(GlobalSetting.c_ConfFileRoot+"scene1.json", data);
 
         SeceneSource source2 = new SeceneSource();
         source2.sceneName = scene.name;
@@ -26,12 +27,14 @@ public class BuildScene
         BundleTools.BuildStart();
         for (int i = 0; i < deps.Length; i++)
         {
+            //if (deps[i].EndsWith(".png") == false && deps[i].EndsWith(".jpg") == false && deps[i].EndsWith(".unity") == false) continue;
             source2.sceneDeps[i] = Keedy.Base.IO.FilePathHelper.GetFileNameWithoutExtension(deps[i]) + "_" + FilePathHelper.GetFileExtension(deps[i]).Substring(1) + ".ab";
             BundleTools.AddAssetBundleBuildToList(deps[i], source2.sceneDeps[i]);
         }
         string data2 = JsonMapper.ToJson(source2);
-        Keedy.Base.IO.FileHelper.SaveFile(Application.dataPath + "/_NeilTest/LoadTest/SceneData2.json", data2);
-        BundleTools.BuildEnd("Assets/_NeilTest/LoadTest/AB/", BuildTarget.StandaloneWindows64, BuildAssetBundleOptions.CompleteAssets, true);
+        data2 = GlobalSetting.FormatJson(data2);
+        Keedy.Base.IO.FileHelper.SaveFile(GlobalSetting.c_ConfFileRoot+"scene2.json", data2);
+        BundleTools.BuildEnd(GlobalSetting.c_ABRoot, BuildTarget.StandaloneWindows64, BuildAssetBundleOptions.CompleteAssets, true);
     }
 
     static string[] GetPrefabPath(Scene scene)
