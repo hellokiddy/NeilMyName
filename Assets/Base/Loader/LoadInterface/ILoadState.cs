@@ -7,6 +7,7 @@ namespace Keedy.Common.Load
     public interface ILoadState
     {
         float LoadProcess { get; }
+        bool IsDone { get; }
         void SetTask(ILoadTask task);
     }
 }
