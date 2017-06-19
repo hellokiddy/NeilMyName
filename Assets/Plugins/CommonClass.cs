@@ -9,9 +9,9 @@ public class CommonClass {
 public static class GlobalSetting
 {
     //test code...
-    public const string c_ABRoot = @"E:\GitProject\NeilMyName\DataPC\";
-    public const string c_ABRootWWW = "file://E:/GitProject/NeilMyName/DataPC/";
-    public const string c_ConfFileRoot = "E:/GitProject/NeilMyName/ConfigFile/";
+    public const string c_ABRoot = @"D:\GitProject\NeilMyName\DataPC\";
+    public const string c_ABRootWWW = "file://D:/GitProject/NeilMyName/DataPC/";
+    public const string c_ConfFileRoot = "D:/GitProject/NeilMyName/ConfigFile/";
 
     public static string GetWWWPath(string path)
     {

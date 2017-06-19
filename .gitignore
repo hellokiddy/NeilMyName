@@ -53,3 +53,12 @@ DataPC
 ConfigFile
 /Assets/UnityVS.meta
 .vs
+/Assembly-CSharp-firstpass.csproj
+/NeilMyName.csproj
+/NeilMyName.Editor.csproj
+/NeilMyName.Plugins.csproj
+/NeilMyName.sln
+/NeilMyName.userprefs
+/_NeilMyName.sln
+/Assembly-CSharp.csproj
+/Assembly-CSharp-Editor.csproj
