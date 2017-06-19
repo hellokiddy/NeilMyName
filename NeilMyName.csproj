@@ -99,12 +99,18 @@
     <Compile Include="Assets\Base\Loader\LoadTask.cs" />
     <Compile Include="Assets\Base\Loader\ResourceLoader.cs" />
     <Compile Include="Assets\Base\Loader\WWWLoader.cs" />
+    <Compile Include="Assets\Base\ObjectPool\ObjectPool.cs" />
+    <Compile Include="Assets\Common\Load\IAsset.cs" />
+    <Compile Include="Assets\Common\Load\LoadManager.cs" />
+    <Compile Include="Assets\Common\Load\LoadTask.cs" />
+    <Compile Include="Assets\Common\Load\Loader.cs" />
     <Compile Include="Assets\_IgnoreResources\Resources\Shaders\CharacterLightControl\Clight.cs" />
     <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\GrassVertexAnimation.cs" />
     <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\MotionBlur.cs" />
     <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\Water.cs" />
     <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\WaterRefl.cs" />
     <Compile Include="Assets\_NeilTest\LoadTest\LoadTestMonoBehaviour.cs" />
+    <Compile Include="Assets\_NeilTest\MemoryTest\StringTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\_IgnoreResources\Resources\Shaders\Effect\effect_distort_add.shader" />

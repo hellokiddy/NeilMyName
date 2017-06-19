@@ -128,7 +128,7 @@ namespace Keedy.Common.Load
                 {
                     return m_AcitveLoaderList[i];
                 }
-            }
+            } 
             for (int i = 0; i < m_WaitingLoaderList.Count; i++)
             {
                 if (path == m_WaitingLoaderList[i].Url)
@@ -177,10 +177,9 @@ namespace Keedy.Common.Load
         {
             Debug.LogError("here need recycle load task...");
         }
-        /// <summary>
+
+
         /// Pop the highest priority loader from m_WaitingLoaderList
-        /// </summary>
-        /// <returns></returns>
         ILoader PopHighestPriorityLoader()
         {
             int index = -1;
