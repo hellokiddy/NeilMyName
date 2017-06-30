@@ -5,21 +5,19 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1A8A99CC-E872-187B-4468-14E2C6DF9AE9}</ProjectGuid>
+    <ProjectGuid>{84FA2DF4-1CC9-915E-EA21-5866917DABB3}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor-firstpass</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectType>EditorPlugins:7</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>5.6.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -54,8 +52,17 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Analytics">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TestRunner">
+      <HintPath>Library\UnityAssemblies\UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>Library\UnityAssemblies\UnityEngine.TestRunner.dll</HintPath>
@@ -66,17 +73,47 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Networking.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\UnityAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.TreeEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.TreeEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.HoloLens">
+      <HintPath>Library\UnityAssemblies\UnityEditor.HoloLens.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>Library\UnityAssemblies\UnityEditor.VR.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+      <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.Mono.Cecil">
+      <HintPath>Assets\UnityVS\Editor\SyntaxTree.Mono.Cecil.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -84,43 +121,13 @@
       <Project>{171A5270-31A3-E186-B995-C52F149DF74A}</Project>
       <Name>NeilMyName.Plugins</Name>
     </ProjectReference>
+    <ProjectReference Include="NeilMyName.csproj">
+      <Project>{1A8A99CC-E872-187B-4468-14E2C6DF9AE9}</Project>
+      <Name>NeilMyName</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Base\IO\DirectoryHelper.cs" />
-    <Compile Include="Assets\Base\IO\FileHelper.cs" />
-    <Compile Include="Assets\Base\IO\FilePathHelper.cs" />
-    <Compile Include="Assets\Base\Loader\AbstractLoader.cs" />
-    <Compile Include="Assets\Base\Loader\LoadAsset.cs" />
-    <Compile Include="Assets\Base\Loader\LoadEnum.cs" />
-    <Compile Include="Assets\Base\Loader\LoadInterface\ILoadAsset.cs" />
-    <Compile Include="Assets\Base\Loader\LoadInterface\ILoadState.cs" />
-    <Compile Include="Assets\Base\Loader\LoadInterface\ILoadTask.cs" />
-    <Compile Include="Assets\Base\Loader\LoadInterface\ILoader.cs" />
-    <Compile Include="Assets\Base\Loader\LoadManager.cs" />
-    <Compile Include="Assets\Base\Loader\LoadState.cs" />
-    <Compile Include="Assets\Base\Loader\LoadTask.cs" />
-    <Compile Include="Assets\Base\Loader\ResourceLoader.cs" />
-    <Compile Include="Assets\Base\Loader\WWWLoader.cs" />
-    <Compile Include="Assets\Base\ObjectPool\ObjectPool.cs" />
-    <Compile Include="Assets\Common\ConfigPath\ConfigPathManager.cs" />
-    <Compile Include="Assets\Common\Load\IAsset.cs" />
-    <Compile Include="Assets\Common\Load\LoadManager.cs" />
-    <Compile Include="Assets\Common\Load\LoadTask.cs" />
-    <Compile Include="Assets\Common\Load\Loader.cs" />
-    <Compile Include="Assets\Common\Load\ResourcesLoader.cs" />
-    <Compile Include="Assets\Common\Load\WWWLoader.cs" />
-    <Compile Include="Assets\Common\Resources\BaseResource.cs" />
-    <Compile Include="Assets\Common\Resources\ResourcesManager.cs" />
-    <Compile Include="Assets\Common\Resources\ResourceTask.cs" />
-    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\CharacterLightControl\Clight.cs" />
-    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\GrassVertexAnimation.cs" />
-    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\MotionBlur.cs" />
-    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\Water.cs" />
-    <Compile Include="Assets\_IgnoreResources\Resources\Shaders\Script\WaterRefl.cs" />
-    <Compile Include="Assets\_NeilTest\BundleTest\AssetBundleTest.cs" />
-    <Compile Include="Assets\_NeilTest\LoadTest\LoadTestMonoBehaviour.cs" />
-    <Compile Include="Assets\_NeilTest\MemoryTest\StringTest.cs" />
-    <Compile Include="Assets\_NeilTest\ResourceTest\ResourceTestScript.cs" />
+    <Compile Include="Assets\Standard Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />

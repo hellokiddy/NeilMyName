@@ -102,7 +102,8 @@ public class BundleTools
     static AssetBundleManifest BuildAssetBundles(string outputPath, BuildAssetBundleOptions option, BuildTarget platform)
     {
         AssetBundleManifest manifest = null;
-        if(mAssetBundleBuildList == null || mAssetBundleBuildList.Count == 0)
+
+        if (mAssetBundleBuildList == null || mAssetBundleBuildList.Count == 0)
         {
             Debug.LogError("Here find no asset to build...");
         }
@@ -221,41 +222,41 @@ public class BundleTools
         }
 
         AssetBundleBuild build = new AssetBundleBuild();
-        bool isBundleNameExist = false;
+        bool isBuildFound = false;
 
-        foreach (AssetBundleBuild tmpBuild in mAssetBundleBuildList)
+
+        for (int i = 0; i < mAssetBundleBuildList.Count; ++i)
         {
-            if (tmpBuild.assetBundleName == bundleName)
+            if (mAssetBundleBuildList[i].assetBundleName == bundleName)
             {
-                build = tmpBuild;
-                isBundleNameExist = true;
+                build = mAssetBundleBuildList[i];
+                isBuildFound = true;
+                mAssetBundleBuildList.RemoveAt(i);
                 break;
             }
         }
 
-        if (isBundleNameExist == false)
+        List<string> assetNames = new List<string>();
+
+        if (isBuildFound)
         {
-            build.assetBundleName = bundleName;
-            build.assetNames = assetPaths;
-            //build.assetBundleVariant = variant;
-            mAssetBundleBuildList.Add(build);
-        }
-        else
-        {
-            List<string> assetNames = new List<string>();
             foreach (string path in build.assetNames)
             {
                 assetNames.Add(path);
             }
+        }
 
-            foreach (string path in assetPaths)
+        foreach (string path in assetPaths)
+        {
+            if (assetNames.Contains(path) == false)
             {
-                if (assetNames.Contains(path) == false)
-                {
-                    assetNames.Add(path);
-                }
+                assetNames.Add(path);
             }
         }
+        build.assetNames = assetNames.ToArray();
+        build.assetBundleName = bundleName;
+
+        mAssetBundleBuildList.Add(build);
     }
 
     static void DeleteFile(string filePath)

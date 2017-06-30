@@ -13,13 +13,13 @@ public class AssetBundleTest : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        mam.Init();
+        //mam.Init();
 
 	}
 
     void StartLoad()
     {
-        mam.CreateLoadTask(paths, OnTaskComplete, 0, ELoaderType.WWW_LOADER);
+        //mam.CreateLoadTask(paths, OnTaskComplete, 0, ELoaderType.WWW_LOADER);
     }
 
     AssetBundle cubeAB;
@@ -102,6 +102,6 @@ public class AssetBundleTest : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-        mam.Update(Time.deltaTime);
+        //mam.Update(Time.deltaTime);
 	}
 }
