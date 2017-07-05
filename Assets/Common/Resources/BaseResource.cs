@@ -8,13 +8,17 @@ public enum EResourceType
 
     AUDIO,
     TEXTURE,
+
+    COUNT
     //...
 }
 
 public enum EResourceState
 {
     INDEXED = 0,
+    LOADING,
     LOADED,//valid state
+    UNLOADED,
 }
 
 public enum EAssetPathType
@@ -29,6 +33,7 @@ public enum EAssetPathType
 }
 
 public delegate void OnBaseResourceLoaded(BaseResource res);
+public delegate void OnBaseResourceNoRef(BaseResource res);
 public class BaseResource
 {
     private string m_Key;
@@ -38,26 +43,25 @@ public class BaseResource
     private IAsset m_Asset;
     private int m_RefCount;
     private event OnBaseResourceLoaded m_OnResLoaded;
+    private event OnBaseResourceNoRef m_OnResNoRef;
 
     public string ResKey { get { return m_Key; } }
     public EResourceState State { get { return m_State; } }
+    /// <summary>
+    /// the resouce has no resource or loader, you need load res for it
+    /// </summary>
+    public bool NeedLoad { get { return m_State != EResourceState.LOADING && m_State != EResourceState.LOADED; } }
     public EResourceType ResType { get { return m_ResourceType; } }
     public EAssetPathType AssetPathType { get { return m_PathType; } }
     public bool Valid { get { return m_State == EResourceState.LOADED; } }
-    public int RefCount { get { return m_RefCount; } }
+    public int RefCount { get { return m_RefCount; } }    
+
     public BaseResource(string key, EResourceType resType)
     {
         m_Key = key;
+        m_State = EResourceState.INDEXED;
+        m_RefCount = 0;
         m_ResourceType = resType;
-        m_State = EResourceState.INDEXED;
-        m_RefCount = 0;
-    }
-
-    public BaseResource(string key)
-    {
-        m_Key = key;
-        m_State = EResourceState.INDEXED;
-        m_RefCount = 0;
     }
 
     public Object LoadAsset(string assetName)
@@ -73,15 +77,56 @@ public class BaseResource
             m_OnResLoaded += onResLoaded;
         }
     }
-    public BaseResource RefResource()
+
+    public void AppednResourceNoRefNotify(OnBaseResourceNoRef onResNoRef)
+    {
+        if(onResNoRef != null)
+        {
+            m_OnResNoRef += onResNoRef;
+        }
+    }
+
+    public void StartDownload()
+    {
+        m_State = EResourceState.LOADING;
+    }
+    public void AddRefCount()
     {
         ++m_RefCount;
-        return this;
     }
+
+    public void ReduceRefCount()
+    {
+        --m_RefCount;
+        //if no ref, release the asset and set the resource state to INDEXED...
+        if(m_RefCount <= 0)
+        {
+            if(m_OnResNoRef != null)
+            {
+                m_OnResLoaded(this);
+            }
+        }
+    }
+
     public void FillResource(IAsset asset)
     {
         m_Asset = asset;
         m_State = EResourceState.LOADED;
+    }
+
+    public void Dispose()
+    {
+        m_State = EResourceState.UNLOADED;
+        m_Key = "";
+        if(m_Asset != null)
+        {
+            m_Asset.Dispose();
+            m_Asset = null;
+        }
+        m_OnResLoaded = null;
+        m_OnResNoRef = null;
+        m_RefCount = 0;
+        m_ResourceType = EResourceType.DEFAULT;
     }
 
 }

@@ -52,7 +52,7 @@ public class ResourceTask
     /// <summary>
     /// all resources needed have been added to the task...
     /// </summary>
-    public  void Ready()
+    public void Ready()
     {
         CheckTask();
     }
@@ -73,6 +73,7 @@ public class ResourceTask
         {
             resource.AppendResourceReadyNotify(OnResourceLoaded);
         }
+        resource.AddRefCount();
         m_ResList.Add(resource);
     }
 
@@ -82,6 +83,37 @@ public class ResourceTask
         {
             m_OnTaskComplete += onTaskComplete;
         }
+    }
+
+    public Object LoadAsset(string resName, string assetName)
+    {
+        for(int i = 0; i < m_ResList.Count; ++i)
+        {
+            BaseResource res = m_ResList[i];
+            if(res.ResKey == resName)
+            {
+                return res.LoadAsset(assetName);
+            }
+        }
+        Debug.LogError("Can't find the resources:" + resName);
+        return null;
+    }
+
+    /// <summary>
+    /// dispose the task
+    /// reduce the refCount of the resources
+    /// </summary>
+    public void Dispose()
+    {
+        for(int i = 0; i < m_ResList.Count; ++i)
+        {
+            if(m_ResList[i] != null)
+            {
+                m_ResList[i].ReduceRefCount();
+            }
+        }
+        m_ResList.Clear();
+        m_OnTaskComplete = null;
     }
 
     //check weather the task is Done to call the m_OnTaskComplete...
@@ -104,15 +136,7 @@ public class ResourceTask
             m_OnTaskComplete(this);
         }
     }
-
-
-
-
-
-
-
-
-
+    
 
 #if UNITY_EDITOR
     bool Contains(string resKey)
